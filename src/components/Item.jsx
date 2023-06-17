@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Item.css';
 
 const Item = ({ item }) => {
@@ -6,7 +7,7 @@ const Item = ({ item }) => {
         <div className="itemWrapper">
             <p>{item.count}</p>
             <p>{item.createdAt}</p>
-            <p>{item.title}</p>
+            <Link to={`/banks/${item._id}`}>{item.title}</Link>
             <p>{item.text}</p>
             <p>{item.updatedAt}</p>
             <div>

@@ -1,26 +1,28 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBanks } from '../redux/slices/banks';
+import { fetchBanks, fetchTags } from '../redux/slices/banks';
 import Item from '../components/Item';
-import './Main.css'
+import './Main.css';
+import TagsBlock from '../components/TagsBlock';
 
 const Main = () => {
     const dispatch = useDispatch();
 
-    const { banks } = useSelector((state) => state.banks);
+    const { banks, tags } = useSelector((state) => state.banks);
 
     const isBanksLoading = banks.status === 'loading';
 
     React.useEffect(() => {
         dispatch(fetchBanks());
+        dispatch(fetchTags());
     }, [dispatch]);
 
     console.log(banks);
 
     return (
-        <>
-            MAIN
-            <div className='itemsWrapper'>
+        <div className="mainWrapper">
+            
+            <div className="itemsWrapper">
                 {(isBanksLoading ? [...Array(5)] : banks.items).map((item, index) =>
                     isBanksLoading ? (
                         <div key={index}>Загрузка</div>
@@ -29,7 +31,10 @@ const Main = () => {
                     ),
                 )}
             </div>
-        </>
+            <div className="sideWrapper">
+                <TagsBlock tags={tags.items}/>
+            </div>
+        </div>
     );
 };
 

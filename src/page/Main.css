@@ -4,3 +4,11 @@
     justify-content: space-evenly;
 
 }
+
+.mainWrapper {
+    display: flex;
+}
+
+.sideWrapper {
+    width: 300px;
+}
