@@ -7,11 +7,12 @@ const Item = ({ item }) => {
         <div className="itemWrapper">
             <p>{item.count}</p>
             <p>{item.createdAt}</p>
+            <img className='itemImg' src={item.imageUrl} alt="itemImg" />
             <Link to={`/banks/${item._id}`}>{item.title}</Link>
             <p>{item.text}</p>
             <p>{item.updatedAt}</p>
             <div>
-                <img src={item.user.avatarUrl} alt="avatar" />
+                <img className='avatarImg' src={item.user.avatarUrl} alt="avatar" />
                 <p>{item.user.fullName}</p>
             </div>
             <p>{item.viewsCount}</p>

@@ -9,6 +9,7 @@ const Main = () => {
     const dispatch = useDispatch();
 
     const { banks, tags } = useSelector((state) => state.banks);
+    console.log('tags: ', tags)
 
     const isBanksLoading = banks.status === 'loading';
 
@@ -16,8 +17,6 @@ const Main = () => {
         dispatch(fetchBanks());
         dispatch(fetchTags());
     }, [dispatch]);
-
-    console.log(banks);
 
     return (
         <div className="mainWrapper">
