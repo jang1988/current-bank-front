@@ -9,7 +9,6 @@ const Main = () => {
     const dispatch = useDispatch();
 
     const { banks, tags } = useSelector((state) => state.banks);
-    console.log('tags: ', tags)
 
     const isBanksLoading = banks.status === 'loading';
 

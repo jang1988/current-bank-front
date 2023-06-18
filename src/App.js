@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import Main from './page/Main';
-import FullBank from './page/FullBank';
 import Header from './components/Header';
+import Main from './page/Main';
+import { Login } from './page/Login';
+import FullBank from './page/FullBank';
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Main />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/banks/:id" element={<FullBank />} />
             </Routes>
         </div>
