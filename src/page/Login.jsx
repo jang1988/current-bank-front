@@ -1,17 +1,23 @@
 import React from 'react';
 
-import { useForm } from "react-hook-form"
+import { useForm } from 'react-hook-form';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserData, selectIsAuth } from '../redux/slices/auth';
+import { fetchUserData, loadedStatus, selectIsAuth } from '../redux/slices/auth';
 import { Navigate } from 'react-router-dom';
 
 import './Login.css';
 
 export const Login = () => {
+    const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);
 
-    const dispatch = useDispatch();
+    const statusAuth = useSelector((state) => state.auth.status);
+    console.log('statusAuth: ', statusAuth);
+
+
+    if (statusAuth === 'error') alert('Пользователь не найден');
+    dispatch(loadedStatus());
 
     const {
         register,
@@ -24,15 +30,13 @@ export const Login = () => {
         },
     });
 
-
     const onSubmit = (value) => {
         dispatch(fetchUserData(value));
+    };
 
-    }
     if (isAuth) {
-        return <Navigate to='/' />;
+        return <Navigate to="/" />;
     }
-
     return (
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
             <h2>Login</h2>
