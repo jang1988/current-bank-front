@@ -9,6 +9,7 @@ const Main = () => {
     const dispatch = useDispatch();
 
     const { banks, tags } = useSelector((state) => state.banks);
+    const userData = useSelector((state) => state.auth.data);
 
     const isBanksLoading = banks.status === 'loading';
 
@@ -25,7 +26,7 @@ const Main = () => {
                     isBanksLoading ? (
                         <div key={index}>Загрузка</div>
                     ) : (
-                        <Item key={index} item={item} />
+                        <Item key={index} item={item} isOwner={userData} />
                     ),
                 )}
             </div>

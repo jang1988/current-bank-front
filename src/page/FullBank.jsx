@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import axios from '../axios';
 import { Link } from 'react-router-dom';
+import './FullBank.css'
 
 
 const FullBank = () => {
@@ -27,7 +28,7 @@ const FullBank = () => {
     }
 
     return (
-        <div>
+        <div className='fullBankWrapper'>
             <p>{item.count}</p>
             <p>{item.createdAt}</p>
             <Link to={`/banks/${item._id}`}>{item.title}</Link>

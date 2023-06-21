@@ -44,7 +44,7 @@ const Header = () => {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link to="/addBank" className="nav-link">
+                <Link to="/add-bank" className="nav-link">
                     Добавить банку
                 </Link>
             </li>
