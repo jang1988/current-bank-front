@@ -2,13 +2,20 @@ import React from 'react';
 import { selectIsAuth } from '../redux/slices/auth';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import './AddBank.css'
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
+import './AddBank.css';
 
 const AddBank = () => {
     const isAuth = useSelector(selectIsAuth);
 
     const imageUrl = '';
     const [value, setValue] = React.useState('');
+    console.log('value: ', value)
+    const [title, setTitle] = React.useState('');
+    console.log('title: ', title)
+    const [tags, setTags] = React.useState('');
+    console.log('tags: ', tags)
 
     const handleChangeFile = () => {};
 
@@ -16,7 +23,23 @@ const AddBank = () => {
 
     const onChange = React.useCallback((value) => {
         setValue(value);
-      }, []);
+    }, []);
+
+    const options = React.useMemo(
+        () => ({
+          spellChecker: false,
+          maxHeight: '400px',
+          autofocus: true,
+          placeholder: 'Введите текст...',
+          status: false,
+          autosave: {
+            enabled: true,
+            delay: 1000,
+            uniqueId: 'my-editor-text',
+          },
+        }),
+        [],
+      );
 
     if (!isAuth) {
         return <Navigate to="/" />;
@@ -46,9 +69,9 @@ const AddBank = () => {
             )}
             <br />
             <br />
-            <input className="title-input" type="text" placeholder="Заголовок статьи..." />
-            <input className="tags-input" type="text" placeholder="Тэги" />
-            <textarea className="editor" value={value} onChange={onChange} />
+            <input className="title-input" type="text" placeholder="Заголовок статьи..." value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input className="tags-input" type="text" placeholder="Тэги" value={tags} onChange={(e) => setTags(e.target.value)}/>
+            <SimpleMDE id="my-editor-text" className="editor" value={value} onChange={onChange} options={options} />
             <div className="button-container">
                 <button className="publish-button" size="large" variant="contained">
                     Опубликовать

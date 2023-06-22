@@ -54,7 +54,7 @@ const Header = () => {
                 </Link>
             </li>
             <li className="nav-item">
-                <button onClick={onClickLogout} className="nav-link">
+                <button onClick={onClickLogout} className="buttonLogout">
                     Выход
                 </button>
             </li>
