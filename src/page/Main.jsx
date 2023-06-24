@@ -26,7 +26,7 @@ const Main = () => {
                     isBanksLoading ? (
                         <div key={index}>Загрузка</div>
                     ) : (
-                        <Item key={index} item={item} isOwner={userData} />
+                        <Item key={index} item={item} isOwner={userData} tags={item.tags} />
                     ),
                 )}
             </div>

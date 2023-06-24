@@ -1,4 +1,7 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchAuthMe } from './redux/slices/auth';
 import Header from './components/Header';
 import Main from './page/Main';
 import { Login } from './page/Login';
@@ -8,6 +11,12 @@ import AddBank from './page/AddBank';
 import './App.css';
 
 function App() {
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(fetchAuthMe());
+    }, [dispatch]);
+
     return (
         <div className="App">
             <Header />

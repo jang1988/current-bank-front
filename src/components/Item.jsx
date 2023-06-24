@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Item.css';
 
-const Item = ({ item, isOwner }) => {
+const Item = ({ item, isOwner, tags }) => {
 
     const onClickRemove = () => {};
     
@@ -19,7 +19,13 @@ const Item = ({ item, isOwner }) => {
                 <p>{item.user.fullName}</p>
             </div>
             <p>{item.viewsCount}</p>
-            <p>{item.tags}</p>
+            <ul className='tagsList'>
+            {tags.map((name) => (
+              <li key={name}>
+                <Link to={`/tag/${name}`}>#{name}</Link>
+              </li>
+            ))}
+          </ul>
             {isOwner && <button onClick={onClickRemove} className="delete-button">Удалить</button>}
         </div>
     );
