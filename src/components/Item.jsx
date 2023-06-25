@@ -70,22 +70,29 @@ const Item = ({ item, isOwner, tags }) => {
         } catch (error) {
             console.error('Ошибка при добавлении числа в базу данных', error);
         }
+        setCountValue('')
     };
 
     return (
         <div className="itemWrapper">
-            <input
-                className="bankValue"
-                type="number"
-                placeholder="Введите количество..."
-                value={countValue}
-                onChange={(e) => setCountValue(e.target.value)}
-            />
-            <button className="add-count-btn" onClick={onClickAdd}>
-                Добавить
-            </button>
+            {isOwner && (
+                <>
+                    <input
+                        className="bankValue"
+                        type="number"
+                        placeholder="Введите количество..."
+                        value={countValue}
+                        onChange={(e) => setCountValue(e.target.value)}
+                    />
+                    <button className="add-count-btn" onClick={onClickAdd}>
+                        Добавить
+                    </button>
+                </>
+            )}
             <p>количество - {item.count}</p>
-            <Link to={`/banks/${item._id}`} className='title-link'>{item.title}</Link>
+            <Link to={`/banks/${item._id}`} className="title-link">
+                {item.title}
+            </Link>
             <p>обьём тары - {item.volume}</p>
             <img
                 className="itemImg"
