@@ -20,10 +20,10 @@ const TagPage = () => {
             <h1>Tag: {name}</h1>
             {taggedItems.length > 0 ? (
                 taggedItems.map((item, i) => (
-                    <Item index={i} key={item.id} item={item} tags={item.tags} />
+                    <Item key={i} item={item} tags={item.tags} />
                 ))
             ) : (
-                <p>No items found with this tag.</p>
+                <p >No items found with this tag.</p>
             )}
         </div>
     );

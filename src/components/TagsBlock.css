@@ -1,0 +1,42 @@
+.TagsBlock {
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  .TagsBlock__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .TagsBlock__list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+  }
+  
+  .TagsBlock__item {
+    display: inline-block;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  
+  .TagsBlock__item:last-child {
+    margin-right: 0;
+  }
+  
+  .TagsBlock__link {
+    text-decoration: none;
+    color: #000;
+    background-color: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .TagsBlock__link:hover {
+    background-color: #e0e0e0;
+  }

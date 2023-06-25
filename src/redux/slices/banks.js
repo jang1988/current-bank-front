@@ -35,7 +35,19 @@ const initialState = {
 const banksSlice = createSlice({
     name: 'banks',
     initialState,
-    reducer: {},
+    reducers: {
+        addCurrentBank: (state, action) => {
+            state.banks.items = state.banks.items.map((item) => {
+                if (item._id === action.payload.id) {
+                    return {
+                        ...item,
+                        count: item.count + action.payload.value,
+                    };
+                }
+                return item;
+            });
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchBanks.pending, (state) => {
@@ -81,3 +93,6 @@ const banksSlice = createSlice({
 });
 
 export const banksReducer = banksSlice.reducer;
+
+export const { addCurrentBank } = banksSlice.actions;
+
