@@ -33,7 +33,7 @@ const FullBank = () => {
             <p>{item.createdAt}</p>
             <Link to={`/banks/${item._id}`}>{item.title}</Link>
             <p>{item.text}</p>
-            <img src={item.imageUrl} alt="itemImg" />
+            <img src={item.imageUrl ? `http://localhost:4444${item.imageUrl}` : ''} alt="itemImg" />
             <p>{item.updatedAt}</p>
             <p>{item.viewsCount}</p>
             <p>{item.tags}</p>

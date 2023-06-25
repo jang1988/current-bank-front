@@ -2,7 +2,7 @@ import React from 'react';
 import { selectIsAuth } from '../redux/slices/auth';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import SimpleMDE from 'react-simplemde-editor';
+
 import axios from '../axios';
 import 'easymde/dist/easymde.min.css';
 import './AddBank.css';
@@ -16,10 +16,10 @@ const AddBank = () => {
     const [title, setTitle] = React.useState('');
     const [tags, setTags] = React.useState('');
     const [volume, setVolume] = React.useState('');
-    console.log('volume: ', volume)
     const [imageUrl, setImageUrl] = React.useState('');
     const inputFileRef = React.useRef(null);
 
+    console.log('isLoading: ', isLoading)
     const isEditing = Boolean(id);
 
     const handleChangeFile = async (event) => {
@@ -28,7 +28,6 @@ const AddBank = () => {
             const file = event.target.files[0];
             formData.append('image', file);
             const { data } = await axios.post('/upload', formData);
-            console.log('data: ', data);
             setImageUrl(data.url);
         } catch (err) {
             console.warn(err);
@@ -39,26 +38,6 @@ const AddBank = () => {
     const onClickRemoveImage = () => {
         setImageUrl('');
     };
-
-    const onChange = React.useCallback((value) => {
-        setText(value);
-    }, []);
-
-    const options = React.useMemo(
-        () => ({
-            spellChecker: false,
-            maxHeight: '400px',
-            autofocus: true,
-            placeholder: 'Введите текст...',
-            status: false,
-            autosave: {
-                enabled: true,
-                delay: 1000,
-                uniqueId: 'my-editor-text',
-            },
-        }),
-        [],
-    );
 
     const onSubmit = async () => {
         try {
@@ -84,6 +63,23 @@ const AddBank = () => {
             alert('Ошибка при создании статьи!');
         }
     };
+
+    React.useEffect(() => {
+        if (id) {
+          axios
+            .get(`/banks/${id}`)
+            .then(({ data }) => {
+              setTitle(data.title);
+              setText(data.text);
+              setImageUrl(data.imageUrl);
+              setTags(data.tags.join(','));
+            })
+            .catch((err) => {
+              console.warn(err);
+              alert('Ошибка при получении статьи!');
+            });
+        }
+      }, [id]);
 
     if (!isAuth) {
         return <Navigate to="/" />;
@@ -139,12 +135,12 @@ const AddBank = () => {
                 value={volume}
                 onChange={(e) => setVolume(e.target.value)}
             />
-            <SimpleMDE
-                id="my-editor-text"
-                className="editor"
+            <input
+                className="tags-input"
+                type="text"
+                placeholder="Введите текст"
                 value={text}
-                onChange={onChange}
-                options={options}
+                onChange={(e) => setText(e.target.value)}
             />
             <div className="button-container">
                 <button
@@ -153,7 +149,7 @@ const AddBank = () => {
                     size="large"
                     variant="contained"
                 >
-                    Опубликовать
+                    {isEditing ? 'Сохранить' : 'Опубликовать'}
                 </button>
                 <a href="/">
                     <button className="cancel-button" size="large">

@@ -8,6 +8,7 @@ import { Login } from './page/Login';
 import Register from './page/Register';
 import FullBank from './page/FullBank';
 import AddBank from './page/AddBank';
+import TagPage from './page/TagPage';
 import './App.css';
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/banks/:id" element={<FullBank />} />
                 <Route path="/add-bank" element={<AddBank />} />
+                <Route path="/bank/:id/edit" element={<AddBank />} />
+                <Route path="/tag/:name" element={<TagPage />} />
             </Routes>
         </div>
     );
