@@ -96,7 +96,7 @@ const Item = ({ item, isOwner, tags }) => {
             <p>обьём тары - {item.volume}</p>
             <img
                 className="itemImg"
-                src={item.imageUrl ? `http://localhost:4444${item.imageUrl}` : ''}
+                src={item.imageUrl ? `http://localhost:80${item.imageUrl}` : ''}
                 alt="itemImg"
             />
 
