@@ -96,7 +96,7 @@ const Item = ({ item, isOwner, tags }) => {
             <p>обьём тары - {item.volume}</p>
             <img
                 className="itemImg"
-                src={item.imageUrl ? `${process.env.EACT_APP_API_URL}${item.imageUrl}` : ''}
+                src={item.imageUrl ? `http://ec2-16-171-25-213.eu-north-1.compute.amazonaws.com/${item.imageUrl}` : ''}
                 alt="itemImg"
             />
 
