@@ -96,7 +96,7 @@ const Item = ({ item, isOwner, tags }) => {
             <p>обьём тары - {item.volume}</p>
             <img
                 className="itemImg"
-                src={item.imageUrl ? `http://ec2-16-171-25-213.eu-north-1.compute.amazonaws.com${item.imageUrl}` : ''}
+                src={item.imageUrl ? `https://elated-deer-loincloth.cyclic.app${item.imageUrl}` : ''}
                 alt="itemImg"
             />
 

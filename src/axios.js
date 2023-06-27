@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://ec2-16-171-25-213.eu-north-1.compute.amazonaws.com'
+    baseURL: 'https://elated-deer-loincloth.cyclic.app'
 })
 
 instance.interceptors.request.use((config) => {
