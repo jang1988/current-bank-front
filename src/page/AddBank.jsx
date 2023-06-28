@@ -27,7 +27,13 @@ const AddBank = () => {
             const formData = new FormData();
             const file = event.target.files[0];
             formData.append('image', file);
-            const { data } = await axios.post('/upload', formData);
+    
+            const { data } = await axios.post('/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+    
             setImageUrl(data.url);
         } catch (err) {
             console.warn(err);
