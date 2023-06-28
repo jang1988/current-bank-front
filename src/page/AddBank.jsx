@@ -19,26 +19,42 @@ const AddBank = () => {
     const [imageUrl, setImageUrl] = React.useState('');
     const inputFileRef = React.useRef(null);
 
-    console.log('isLoading: ', isLoading)
+    console.log('isLoading: ', isLoading);
     const isEditing = Boolean(id);
 
     const handleChangeFile = async (event) => {
-        try {
-            const formData = new FormData();
-            const file = event.target.files[0];
-            formData.append('image', file);
-    
-            const { data } = await axios.post('/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+        // try {
+        //     const formData = new FormData();
+        //     const file = event.target.files[0];
+        //     formData.append('image', file);
+
+        //     const { data } = await axios.post('/upload', formData, {
+        //         headers: {
+        //             'Content-Type': 'multipart/form-data'
+        //         }
+        //     });
+
+        //     setImageUrl(data.url);
+        // } catch (err) {
+        //     console.warn(err);
+        //     alert('Ошибка при загрузке файла!');
+        // }
+
+        const formData = new FormData();
+        const file = event.target.files[0];
+        formData.append('image', file);
+
+        fetch('https://elated-deer-loincloth.cyclic.app/upload', {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors', // Опция no-cors отключает проверку CORS
+        })
+            .then((response) => {
+                '// Обработка успешного ответа'
+            })
+            .catch((error) => {
+                '// Обработка ошибки'
             });
-    
-            setImageUrl(data.url);
-        } catch (err) {
-            console.warn(err);
-            alert('Ошибка при загрузке файла!');
-        }
     };
 
     const onClickRemoveImage = () => {
@@ -72,20 +88,20 @@ const AddBank = () => {
 
     React.useEffect(() => {
         if (id) {
-          axios
-            .get(`/banks/${id}`)
-            .then(({ data }) => {
-              setTitle(data.title);
-              setText(data.text);
-              setImageUrl(data.imageUrl);
-              setTags(data.tags.join(','));
-            })
-            .catch((err) => {
-              console.warn(err);
-              alert('Ошибка при получении статьи!');
-            });
+            axios
+                .get(`/banks/${id}`)
+                .then(({ data }) => {
+                    setTitle(data.title);
+                    setText(data.text);
+                    setImageUrl(data.imageUrl);
+                    setTags(data.tags.join(','));
+                })
+                .catch((err) => {
+                    console.warn(err);
+                    alert('Ошибка при получении статьи!');
+                });
         }
-      }, [id]);
+    }, [id]);
 
     if (!isAuth) {
         return <Navigate to="/" />;
