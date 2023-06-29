@@ -25,9 +25,13 @@ const Register = () => {
 
     const onSubmit = async (value) => {
         const data = await dispatch(fetchRegister(value));
-        
+
         if (!data.payload) {
-            return alert('Не удалось зарегистрироваться')
+            return alert('Не удалось зарегистрироваться');
+        }
+        
+        if ('token' in data.payload) {
+            window.localStorage.setItem('token', data.payload.token);
         }
     };
 
@@ -70,7 +74,9 @@ const Register = () => {
                 />
                 {errors.password && <span className="error">{errors.password.message}</span>}
             </div>
-            <button className={isValid ? 'registerButton' : ''} disabled={!isValid} type="submit">Register</button>
+            <button className={isValid ? 'registerButton' : ''} disabled={!isValid} type="submit">
+                Register
+            </button>
         </form>
     );
 };

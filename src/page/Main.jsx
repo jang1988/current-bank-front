@@ -8,14 +8,13 @@ import './Main.css';
 
 const Main = () => {
     const location = useLocation();
-  const dispatch = useDispatch();
-  const [tags, setTags] = React.useState([]);
+    const dispatch = useDispatch();
+    const [tags, setTags] = React.useState([]);
 
+    const { banks, tags: allTags } = useSelector((state) => state.banks);
+    const userData = useSelector((state) => state.auth.data);
 
-  const { banks, tags: allTags } = useSelector((state) => state.banks);
-  const userData = useSelector((state) => state.auth.data);
-
-  const isBanksLoading = banks.status === 'loading';
+    const isBanksLoading = banks.status === 'loading';
 
     React.useEffect(() => {
         dispatch(fetchBanks());
@@ -26,27 +25,27 @@ const Main = () => {
         const searchParams = new URLSearchParams(location.search);
         const tagsParam = searchParams.get('tags');
         if (tagsParam) {
-          const tagsArray = tagsParam.split(',');
-          setTags(tagsArray);
-          dispatch(fetchBanksByTags(tagsArray));
+            const tagsArray = tagsParam.split(',');
+            setTags(tagsArray);
+            dispatch(fetchBanksByTags(tagsArray));
         } else {
-          setTags([]);
+            setTags([]);
         }
-      }, [location, dispatch]);
+    }, [location, dispatch]);
 
     return (
         <div className="mainWrapper">
-        <div className="itemsWrapper">
-          {isBanksLoading
-            ? [...Array(5)].map((_, index) => <div key={index}>Загрузка</div>)
-            : banks.items.map((item) => (
-                <Item key={item._id} item={item} isOwner={userData} tags={item.tags} />
-              ))}
+            <div className="itemsWrapper">
+                {isBanksLoading
+                    ? [...Array(5)].map((_, index) => <div key={index}>Загрузка</div>)
+                    : banks.items.map((item) => (
+                          <Item key={item._id} item={item} isOwner={userData} tags={item.tags} />
+                      ))}
+            </div>
+            <div className="sideWrapper">
+                <TagsBlock tags={allTags.items} selectedTags={tags} />
+            </div>
         </div>
-        <div className="sideWrapper">
-          <TagsBlock tags={allTags.items} selectedTags={tags} />
-        </div>
-      </div>
     );
 };
 

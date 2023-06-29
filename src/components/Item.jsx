@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { fetchRemoveBank, addCurrentBank } from '../redux/slices/banks';
 import { Link } from 'react-router-dom';
 import axios from '../axios';
+import ava from '../assets/images/ava.jpg';
 import './Item.css';
 
 const Item = ({ item, isOwner, tags }) => {
@@ -96,7 +97,7 @@ const Item = ({ item, isOwner, tags }) => {
             <p>обьём тары - {item.volume}</p>
             <img
                 className="itemImg"
-                src={item.imageUrl ? `https://elated-deer-loincloth.cyclic.app${item.imageUrl}` : ''}
+                src={item.imageUrl ? `http://localhost${item.imageUrl}` : ''}
                 alt="itemImg"
             />
 
@@ -104,7 +105,7 @@ const Item = ({ item, isOwner, tags }) => {
             <p>дата приёма</p>
             <p>{item.updatedAt.slice(0, -5)}</p>
             <div className="userWrapper">
-                <img className="avatarImg" src={item.user.avatarUrl} alt="avatar" />
+                <img className="avatarImg" src={item.user.avatarUrl || ava } alt="avatar" />
                 <p>{item.user.fullName}</p>
             </div>
             <p>

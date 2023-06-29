@@ -110,7 +110,7 @@ const AddBank = () => {
             {imageUrl && (
                 <img
                     className="uploaded-image"
-                    src={`https://elated-deer-loincloth.cyclic.app${imageUrl}`}
+                    src={`http://localhost${imageUrl}`}
                     alt="Uploaded"
                 />
             )}
