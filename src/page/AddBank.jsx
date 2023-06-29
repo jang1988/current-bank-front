@@ -110,7 +110,7 @@ const AddBank = () => {
             {imageUrl && (
                 <img
                     className="uploaded-image"
-                    src={`http://localhost${imageUrl}`}
+                    src={`https://api-current-bank.up.railway.app${imageUrl}`}
                     alt="Uploaded"
                 />
             )}

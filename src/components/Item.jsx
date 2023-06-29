@@ -97,7 +97,7 @@ const Item = ({ item, isOwner, tags }) => {
             <p>обьём тары - {item.volume}</p>
             <img
                 className="itemImg"
-                src={item.imageUrl ? `http://localhost${item.imageUrl}` : ''}
+                src={item.imageUrl ? `https://api-current-bank.up.railway.app${item.imageUrl}` : ''}
                 alt="itemImg"
             />
 
