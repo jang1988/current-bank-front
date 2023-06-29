@@ -23,38 +23,18 @@ const AddBank = () => {
     const isEditing = Boolean(id);
 
     const handleChangeFile = async (event) => {
-        // try {
-        //     const formData = new FormData();
-        //     const file = event.target.files[0];
-        //     formData.append('image', file);
+        try {
+            const formData = new FormData();
+            const file = event.target.files[0];
+            formData.append('image', file);
 
-        //     const { data } = await axios.post('/upload', formData, {
-        //         headers: {
-        //             'Content-Type': 'multipart/form-data'
-        //         }
-        //     });
+            const { data } = await axios.post('/upload', formData);
 
-        //     setImageUrl(data.url);
-        // } catch (err) {
-        //     console.warn(err);
-        //     alert('Ошибка при загрузке файла!');
-        // }
-
-        const formData = new FormData();
-        const file = event.target.files[0];
-        formData.append('image', file);
-
-        fetch('https://elated-deer-loincloth.cyclic.app/upload', {
-            method: 'POST',
-            body: formData,
-            mode: 'no-cors', // Опция no-cors отключает проверку CORS
-        })
-            .then((response) => {
-                '// Обработка успешного ответа'
-            })
-            .catch((error) => {
-                '// Обработка ошибки'
-            });
+            setImageUrl(data.url);
+        } catch (err) {
+            console.warn(err);
+            alert('Ошибка при загрузке файла!');
+        }
     };
 
     const onClickRemoveImage = () => {
